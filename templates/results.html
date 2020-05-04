@@ -15,6 +15,9 @@
     tr[data-is-chair="True"]{
       background: #c2c2c2;
     }
+    tr[data-is-mk="True"]{
+      background: lightblue;
+    }
     </style>
   </head>
   <body>
@@ -23,32 +26,37 @@
       <table border="1" cellpadding="5">
           <tr>
             <th>דובר</th>
-            <th>מילות יור</th>
-            <th>מילות דובר אחר</th>
             <th>טקסט</th>
           </tr>
         	{% for row in rows %}
-        	  <tr data-is-chair="{{ row["isChair"] }}">
+        	  <tr data-is-chair="{{ row["isChair"] }}" data-is-mk="{{ row["isMK"] }}" >
         	    <td> {{ row["speakerName"] }} </td>
-              <td> {{ row["chairWords"] }} </td>
-              <td> {{ row["otherWords"] }} </td>
               <td> {{ row["text"] }} </td>
         	 </tr>
         	{% endfor %}
+        </table>
+        <hr />
+        <table border="1" cellpadding="5" width="100%">
           <tr class="results">
             <th colspan="4">תוצאות</th>
           </tr>
           <tr class="results">
+            <th></th>
+            <th>יו"ר</th>
+            <th>חברי כנסת</th>
+            <th>אורחים</th>
+          </tr>
+          <tr class="results">
             <th>סה"כ מילים:</th>
             <td> {{ results["chairWords"] }} </td>
-            <td> {{ results["otherWords"] }} </td>
-            <td></td>
+            <td> {{ results["mkWords"] }} </td>
+            <td> {{ results["guestWords"] }} </td>
           </tr>
           <tr class="results">
             <th>באחוזים:</th>
             <td> {{ "%.2f"|format(results["chairWordsPercentage"]) }}% </td>
-            <td> {{ "%.2f"|format(results["otherWordsPercentage"]) }}% </td>
-            <td></td>
+            <td> {{ "%.2f"|format(results["mkWordsPercentage"]) }}% </td>
+            <td> {{ "%.2f"|format(results["guestWordsPercentage"]) }}% </td>
           </tr>
       </table>
     </article>
